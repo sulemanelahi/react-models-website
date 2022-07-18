@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
-
 import PersonItem from '../components/PersonItem';
-import { data } from '../utils/MOCK_DATA';
 import FilterBar from '../components/FilterBar';
+import { read } from '../api/model';
 
 const isSameOrAfter = require('dayjs/plugin/isSameOrAfter');
 const isSameOrBefore = require('dayjs/plugin/isSameOrBefore');
@@ -11,7 +10,12 @@ dayjs.extend(isSameOrBefore);
 dayjs.extend(isSameOrAfter);
 
 function Search() {
-  const [allData, setData] = useState(data);
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    read().then((res) => {
+      setData(res?.data);
+    });
+  }, []);
 
   const generateGenderDataForDropdown = () => {
     return [...new Set(data.map((item) => item.gender))];
@@ -203,8 +207,8 @@ function Search() {
         </div>
         <div className='col-sm-9'>
           <div className='row mt-5'>
-            {allData.map((item) => (
-              <PersonItem item={item} key={item.id} />
+            {data.map((item, index) => (
+              <PersonItem item={item} key={index} />
             ))}
           </div>
         </div>

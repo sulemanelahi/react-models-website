@@ -34,7 +34,6 @@ const FilterBar = ({
 
   const handleInput = (field) => (event) => {
     const { value } = event.target;
-
     setFilters({
       ...filters,
       [field]: value,
@@ -53,7 +52,7 @@ const FilterBar = ({
         break;
 
       case 'hairLength':
-        onHairColorFilter(value);
+        onHairLengthFilter(value);
         break;
 
       case 'braSize':
@@ -107,33 +106,19 @@ const FilterBar = ({
         <label htmlFor='gender'>Gender</label>
         <select className='form-control' id='gender' onChange={handleInput('gender')}>
           <option value=''>Select</option>
-          {genders.map((gender) => (
-            <option value={gender} key={gender}>
+          {genders.map((gender, index) => (
+            <option value={gender} key={index}>
               {gender}
             </option>
           ))}
         </select>
       </div>
-      {/* age */}
-      {/* <div className='col-sm-12 my-2'>
-        <label htmlFor='email'>Email</label>
-        <input type='text' className='form-control' id='email' onChange={handleInput('email')} />
-      </div> */}
-      {/* age */}
-      {/* <div className='col-sm-12 my-2'>
-        <label htmlFor='startDate'>From</label>
-        <input type='date' className='form-control' id='startDate' onChange={handleInput('from')} />
-      </div>
-      <div className='col-sm-12 my-2'>
-        <label htmlFor='endDate'>To</label>
-        <input type='date' className='form-control' id='endDate' onChange={handleInput('to')} />
-      </div> */}
       <div className='col-sm-12 my-2'>
         <label htmlFor='profession'>Profession</label>
         <select className='form-control' id='profession' onChange={handleInput('profession')}>
           <option value=''>Select</option>
-          {professions.map((profession) => (
-            <option value={profession} key={profession}>
+          {professions.map((profession, index) => (
+            <option value={profession} key={index}>
               {profession}
             </option>
           ))}
@@ -167,8 +152,8 @@ const FilterBar = ({
         <label htmlFor='cast'>Cast</label>
         <select className='form-control' id='cast' onChange={handleInput('cast')}>
           <option value=''>Select</option>
-          {casts.map((cast) => (
-            <option value={cast} key={cast}>
+          {casts.map((cast, index) => (
+            <option value={cast} key={index}>
               {cast}
             </option>
           ))}
